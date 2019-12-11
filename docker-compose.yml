@@ -45,7 +45,6 @@ services:
     volumes:
       - postgressql:/var/lib/postgresql/data
 
-
 volumes:
   namenode:
     driver: local
