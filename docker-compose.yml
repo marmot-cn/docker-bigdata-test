@@ -11,6 +11,7 @@ services:
       - ./hadoop-hive.env
     ports:
       - "50070:50070"
+      - "8020:8020"
   datanode:
     image: registry.cn-hangzhou.aliyuncs.com/marmot/bigdata-hadoop-datanode
     volumes:
@@ -41,7 +42,26 @@ services:
       - "9083:9083"
   hive-metastore-postgresql:
     image: registry.cn-hangzhou.aliyuncs.com/marmot/bigdata-hive-metastore-postgresql
+    volumes:
+      - postgressql:/var/lib/postgresql/data
+
 
 volumes:
   namenode:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /data/hadoop/namenode
   datanode:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /data/hadoop/datanode
+  postgressql:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /data/hive/postgressql
